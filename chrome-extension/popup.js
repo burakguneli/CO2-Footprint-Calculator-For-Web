@@ -1,12 +1,7 @@
 let detailsButton = document.getElementById("detailsButton");
+let testButton = document.getElementById("testButton");
 let tabCO2Text = document.getElementById("tabCO2Text");
 let sessionCO2Text = document.getElementById("sessionCO2Text");
-
-window.onload = function () {
-	// This will be triggered when clicked on extension icon
-	// TODO: Here we should calculate transfer size of active tab and show
-	// here is the list of Chrome APIs we can use: https://developer.chrome.com/extensions/api_index
-};
 
 // Load data from storage and show on UI
 

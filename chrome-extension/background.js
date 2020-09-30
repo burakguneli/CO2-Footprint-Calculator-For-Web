@@ -24,3 +24,14 @@ chrome.runtime.onInstalled.addListener(function () {
 		]);
 	});
 });
+
+// Tell contentScript which tab is user on
+chrome.extension.onMessage.addListener(function (
+	message,
+	sender,
+	sendResponse
+) {
+	if (message.type == "getTabId") {
+		sendResponse({ tabID: sender.tab.id });
+	}
+});

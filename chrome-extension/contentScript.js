@@ -1,14 +1,25 @@
-setInterval(function () {
-	console.log({
-		mb: calculateTotalTransferSize(),
-	});
-}, 1000);
+var tabId;
 
-//
+// We can't directly get tab id in content script, so we
+// should communicate with background script.
+// Request tabID information from background script,
+// when got it, start logging transfer size
+chrome.extension.sendMessage({ type: "getTabId" }, function (res) {
+	const { tabID } = res;
 
-//
+	setInterval(function () {
+		console.log({
+			tabID,
+			transferSize: calculateTotalTransferSize(),
+		});
 
-//
+		// TODO: Here we should update active tab's data using tab ID
+	}, 3000);
+});
+
+/////////////////////////
+// Utils
+/////////////////////////
 
 var ONE_MB_TRANSFER_CARBON_EMISSION_IN_TERMS_OF_KILOGRAM = 0.003;
 var ONE_MB_TRANSFER_CARBON_EMISSION_IN_TERMS_OF_GRAM = 3;
