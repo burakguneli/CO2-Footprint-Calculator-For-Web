@@ -4,18 +4,20 @@ var tabId;
 // should communicate with background script.
 // Request tabID information from background script,
 // when got it, start logging transfer size
-chrome.extension.sendMessage({ type: "getTabId" }, function (res) {
-	const { tabID } = res;
-
-	setInterval(function () {
-		console.log({
-			tabID,
-			transferSize: calculateTotalTransferSize(),
-		});
-
-		// TODO: Here we should update active tab's data using tab ID
-	}, 3000);
-});
+setInterval(
+	function () {
+		chrome.extension.sendMessage(
+			{
+				type: "getTabId",
+				transferSize: calculateTotalTransferSize()
+			},
+			function (res) {
+				console.log(res);
+			}
+		);
+	},
+	3000
+);
 
 /////////////////////////
 // Utils
@@ -42,4 +44,12 @@ function calculateTotalTransferSize() {
 	var totalTransferSizeInTermsOfMB = totalTransferSize / 1000000;
 
 	return totalTransferSizeInTermsOfMB;
+}
+
+function calculateCarbonEmmissionInTermsOfGram(transferSize) {
+	return ONE_MB_TRANSFER_CARBON_EMISSION_IN_TERMS_OF_GRAM * transferSize;
+}
+
+function calculateCarbonEmmissionInTermsOfKilogram(transferSize) {
+	return ONE_MB_TRANSFER_CARBON_EMISSION_IN_TERMS_OF_KILOGRAM * transferSize;
 }

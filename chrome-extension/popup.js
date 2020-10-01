@@ -5,8 +5,14 @@ let sessionCO2Text = document.getElementById("sessionCO2Text");
 
 // Load data from storage and show on UI
 
+setInterval(function () {
+	chrome.storage.sync.get("tabCO2Emission", function (data) {
+		tabCO2Text.textContent = `${data.tabCO2Emission} Grams`;
+	});
+}, 3000);
+
 chrome.storage.sync.get("tabCO2Emission", function (data) {
-	tabCO2Text.textContent = data.tabCO2Emission;
+	tabCO2Text.textContent = `${data.tabCO2Emission} Grams`;
 });
 
 chrome.storage.sync.get("sessionCO2Emission", function (data) {

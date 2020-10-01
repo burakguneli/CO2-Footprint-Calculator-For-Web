@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(function () {
 		{
 			totalCO2Emission: 200,
 			sessionCO2Emission: 100,
-			tabCO2Emission: 15,
+			tabCO2Emission: 0,
 		},
 		function () {
 			console.log("Extension initialized");
@@ -25,6 +25,17 @@ chrome.runtime.onInstalled.addListener(function () {
 	});
 });
 
+function updateStorage(key, value) {
+	chrome.storage.sync.set(
+		{
+			[key]: value,
+		},
+		function () {
+			console.log(`${key} field updated!`);
+		}
+	);
+}
+
 // Tell contentScript which tab is user on
 chrome.extension.onMessage.addListener(function (
 	message,
@@ -32,6 +43,11 @@ chrome.extension.onMessage.addListener(function (
 	sendResponse
 ) {
 	if (message.type == "getTabId") {
-		sendResponse({ tabID: sender.tab.id });
+		updateStorage("tabCO2Emission", message.transferSize);
+
+		sendResponse({
+			tabID: sender.tab.id,
+			tabCO2Emission: message.transferSize
+		});
 	}
 });
