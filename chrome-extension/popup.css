@@ -68,6 +68,11 @@ hr {
 	opacity: 1;
 }
 
+#host-green-info {
+	margin-bottom: 16px;
+	text-align: center;
+}
+
 .info-line {
 	display: flex;
 	justify-content: space-between;
