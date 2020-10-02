@@ -2,8 +2,7 @@ chrome.runtime.onInstalled.addListener(function () {
 	chrome.storage.sync.set(
 		{
 			totalCO2Emission: 200,
-			sessionCO2Emission: 100,
-			tabCO2Emission: 0,
+			sessionCO2Emission: 100
 		},
 		function () {
 			console.log("Extension initialized");
@@ -25,10 +24,12 @@ chrome.runtime.onInstalled.addListener(function () {
 	});
 });
 
-function updateStorage(key, value) {
+function updateStorage(tabId, key, value) {
 	chrome.storage.sync.set(
 		{
-			[key]: value,
+			[tabId]: {
+				[key]: value	
+			}
 		},
 		function () {
 			console.log(`${key} field updated!`);
@@ -43,7 +44,7 @@ chrome.extension.onMessage.addListener(function (
 	sendResponse
 ) {
 	if (message.type == "getTabId") {
-		updateStorage("tabCO2Emission", message.transferSize);
+		updateStorage(sender.tab.id, "tabCO2Emission", message.transferSize);
 
 		sendResponse({
 			tabID: sender.tab.id,
