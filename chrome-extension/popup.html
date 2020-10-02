@@ -2,35 +2,51 @@
 <html>
 
 <head>
-  <style>
-    body {
-      width: 300px;
-    }
-
-    #detailsButton {
-      width: auto;
-      background: none;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 
 <body>
-  <p>
-    <b>CO2 Emission on Session: </b>
-    <span id="sessionCO2Text"></span>
-  </p>
+  <header>
+    <div class="header__title-row">
+      <h1 class="popup-title">Browser CO2 Emission</h1>
 
-  <p>
-    <b>CO2 Emission on this website: </b>
-    <span id="tabCO2Text"></span>
-  </p>
+      <button id="detailsButton">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path opacity="0.3"
+            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+            fill="#546B5B" />
+          <path
+            d="M13 11C13 10.4477 12.5523 10 12 10C11.4477 10 11 10.4477 11 11V16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16V11Z"
+            fill="#546B5B" />
+          <path
+            d="M13 8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8C11 8.55228 11.4477 9 12 9C12.5523 9 13 8.55228 13 8Z"
+            fill="#546B5B" />
+        </svg>
+      </button>
+    </div>
+  </header>
 
-  <code id="log"></code>
+  <main>
+    <div class="info-line">
+      <p class="info-line__title">This site: </p>
+      <p class="info-line__count info-line__count--this-site" id="tabCO2Text"></p>
+    </div>
 
-  <button id="detailsButton">
-    Details >
-  </button>
+    <div class="info-line">
+      <p class="info-line__title">Session Total: </p>
+      <p class="info-line__count info-line__count--session" id="sessionCO2Text"></p>
+    </div>
 
+    <hr />
+
+    <div class="info-line">
+      <p class="info-line__title">Donate to Offset </p>
+      <p class="info-line__count info-line__count--donation">$4.52</p>
+    </div>
+
+    <code id="log"></code>
+
+  </main>
   <script src="popup.js"></script>
 </body>
 
