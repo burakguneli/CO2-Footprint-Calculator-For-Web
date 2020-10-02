@@ -69,7 +69,7 @@ setInterval(function () {
 		if (currTab) {
 			chrome.storage.sync.get(null, function (data) {
 				if (data[currTab.id]) {
-					tabCO2Text.textContent = `${data[currTab.id].tabCO2Emission} Grams`;
+					tabCO2Text.textContent = data[currTab.id].tabCO2Emission ? `${data[currTab.id].tabCO2Emission} Grams` : "Loading...";
 				}
 			});
 		}
@@ -77,7 +77,7 @@ setInterval(function () {
 }, 2000);
 
 chrome.storage.sync.get("tabCO2Emission", function (data) {
-	tabCO2Text.textContent = `${data.tabCO2Emission} Grams`;
+	tabCO2Text.textContent = "Loading...";
 });
 
 chrome.storage.sync.get("sessionCO2Emission", function (data) {
