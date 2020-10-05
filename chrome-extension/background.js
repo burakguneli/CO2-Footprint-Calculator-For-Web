@@ -1,6 +1,5 @@
 chrome.runtime.onInstalled.addListener(function () {
 	chrome.storage.local.set({
-		totalCO2Emission: 0,
 		sessionCO2Emission: 0
 	});
 
