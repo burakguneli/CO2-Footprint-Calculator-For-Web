@@ -1,13 +1,8 @@
 chrome.runtime.onInstalled.addListener(function () {
-	chrome.storage.sync.set(
-		{
-			totalCO2Emission: 200,
-			sessionCO2Emission: 100
-		},
-		function () {
-			console.log("Extension initialized");
-		}
-	);
+	chrome.storage.sync.set({
+		totalCO2Emission: 0,
+		sessionCO2Emission: 0
+	});
 
 	chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
 		chrome.declarativeContent.onPageChanged.addRules([
@@ -25,16 +20,11 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 function updateStorage(tabId, key, value) {
-	chrome.storage.sync.set(
-		{
-			[tabId]: {
-				[key]: value	
-			}
-		},
-		function () {
-			console.log(`${key} field updated!`);
+	chrome.storage.sync.set({
+		[tabId]: {
+			[key]: value	
 		}
-	);
+	});
 }
 
 // Tell contentScript which tab is user on
