@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(function () {
-	chrome.storage.sync.set({
+	chrome.storage.local.set({
 		totalCO2Emission: 0,
 		sessionCO2Emission: 0
 	});
@@ -20,7 +20,7 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 function updateStorage(tabId, key, value) {
-	chrome.storage.sync.set({
+	chrome.storage.local.set({
 		[tabId]: {
 			[key]: value	
 		}

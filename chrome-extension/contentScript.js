@@ -6,15 +6,10 @@ var tabId;
 // when got it, start logging transfer size
 setInterval(
 	function () {
-		chrome.extension.sendMessage(
-			{
-				type: "getTabId",
-				transferSize: calculateTotalTransferSize()
-			},
-			function (res) {
-				console.log(res);
-			}
-		);
+		chrome.extension.sendMessage({
+			type: "getTabId",
+			transferSize: calculateTotalTransferSize()
+		});
 	},
 	2000
 );

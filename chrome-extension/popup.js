@@ -73,10 +73,11 @@ setInterval(
 				var currTab = tabs[0];
 
 				if (currTab) {
-					chrome.storage.sync.get(null, function (data) {
+					chrome.storage.local.get(null, function (data) {
 						if (data[currTab.id]) {
-							tabCO2Text.textContent = data[currTab.id].tabCO2Emission ? `${data[currTab.id].tabCO2Emission.toFixed(2)} Grams` : "Loading...";
-							sessionCO2Text.textContent = data.sessionCO2Emission ? `${data.sessionCO2Emission.toFixed(2)} Grams` : "Loading...";
+							tabCO2Text.textContent = data[currTab.id].tabCO2Emission && data[currTab.id].tabCO2Emission >= 0 ?
+								`${data[currTab.id].tabCO2Emission.toFixed(2)} Grams` : "Loading...";
+							sessionCO2Text.textContent = data.sessionCO2Emission >=0 ? `${data.sessionCO2Emission.toFixed(2)} Grams` : "Loading...";
 						}
 					});
 				}
@@ -86,7 +87,7 @@ setInterval(
 		chrome.tabs.query(
 			{currentWindow: true},
 			function (tabs) {
-				chrome.storage.sync.get(null, function (data) {
+				chrome.storage.local.get(null, function (data) {
 					const currentSessionTotalEmission = tabs.reduce(
 						(accumulator, currentTab) => {
 							let newTotalEmission = accumulator;
@@ -100,7 +101,7 @@ setInterval(
 						0
 					);
 
-					chrome.storage.sync.set({
+					chrome.storage.local.set({
 						sessionCO2Emission: currentSessionTotalEmission
 					});
 				});
