@@ -1,3 +1,7 @@
+function getAndUseAllDataFromStorage(callback) {
+	chrome.storage.local.get(null, callback);
+}
+
 chrome.runtime.onInstalled.addListener(function () {
 	chrome.storage.local.set({
 		sessionCO2Emission: 0
@@ -21,7 +25,7 @@ chrome.runtime.onInstalled.addListener(function () {
 // Adds previous pages emission to all time emission count after navigating to another page
 chrome.webNavigation.onBeforeNavigate.addListener(
 	(navigationDetails) => {
-		chrome.storage.local.get(null, function (data) {
+		getAndUseAllDataFromStorage(data => {
 			if (data.allTimeEmission) {
 				currentAllTimeEmission = data.allTimeEmission;
 
@@ -39,7 +43,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(
 
 // Adds tab emission to all time emission count after closing the tab
 chrome.tabs.onRemoved.addListener(function(tabId) {
-	chrome.storage.local.get(null, function (data) {
+	getAndUseAllDataFromStorage(data => {
 		if (data.allTimeEmission) {
 			currentAllTimeEmission = data.allTimeEmission;
 
