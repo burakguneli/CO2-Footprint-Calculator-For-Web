@@ -11,8 +11,65 @@
 
 <body>
   <div id="container">
-    <h1>All-time CO2 Emission:</h1>
-    <p id="allTimeEmission"></p>
+    <h1>About</h1>
+    
+    <p>
+      This is a totally unaccurate carbon emission calculator. Help us to make it more accurate: <a href="https://github.com/burakguneli/CO2-Footprint-Calculator-For-Web" target="_blank">Github</a>
+    </p>
+
+    <h2>How it works?</h2>
+
+    <p>
+      Using browser API's, extension gets total transfer size and "guesses" emitted CO2 according to total transfer size of the page.
+    </p>
+
+    <p>
+      We are using word "guess" because it's nearly impossible to measure carbon emission just using transfer size data. This extension accepts that 1 MB transfer emits 0.003 kilograms of CO2.
+    </p>
+
+    <h2>I Want To Reduce My Emission, What Should I Do?</h2>
+
+    <p>
+      If you are not a web developer, there is nothing that you should do. You can just use this extesion for fun.
+    </p>
+
+    <p>
+      If you are a web developer, you can calculate how much your app emits CO2 and you can try to reduce transfer size of your app. Also you can always contribute to this <a href="https://github.com/burakguneli/CO2-Footprint-Calculator-For-Web" target="_blank">project</a>.
+    </p>
+
+    <h1>TO-DO</h1>
+
+    <ul>
+      <li>Find a way to calculate emission on pages which use socket</li>
+
+      <li>If website fetchs data with workers, we can't gather transfer size amount. Find a way to get transfer size for those pages</li>
+
+      <li>Don't calculate CO2 emission if current site is "green hosted"</li>
+
+      <li>Make a better detail page</li>
+    </ul>
+
+    <h1>Contributors</h1>
+
+    <ul>
+      <li>
+        <a href="https://twitter.com/burakGuneli">burak</a>
+      </li>
+
+      <li>
+        <a href="https://twitter.com/jamcry">cem</a>
+      </li>
+
+      <li>
+        <a href="https://twitter.com/keryilmaz">kaan</a>
+      </li>
+
+      <li>
+        <a href="https://twitter.com/ed_celik">ediz</a>
+      </li>
+    </ul>
+
+    <i>Note: This extension isn't complete and it's in a very early stage.</i>
   </div>
 
   <script src="options.js"></script>
