@@ -6,6 +6,7 @@
 		"unlimitedStorage",
 		"activeTab",
 		"declarativeContent",
+		"webNavigation",
 		"storage"
 	],
 	"background": {

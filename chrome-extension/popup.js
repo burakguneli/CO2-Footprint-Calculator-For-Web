@@ -2,6 +2,7 @@ let detailsButton = document.getElementById("detailsButton");
 let testButton = document.getElementById("testButton");
 let tabCO2Text = document.getElementById("tabCO2Text");
 let sessionCO2Text = document.getElementById("sessionCO2Text");
+let allTimeEmissionText = document.getElementById("allTimeEmission");
 let activeTab = document.getElementById("activeTab");
 let greenityInfoDiv = document.getElementById("host-green-info");
 
@@ -64,6 +65,10 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 
 setInterval(
 	function () {
+		chrome.storage.local.get("allTimeEmission", function (data) {
+			allTimeEmissionText.textContent = data.allTimeEmission >=0 ? `${data.allTimeEmission.toFixed(2)} Grams` : "Recording...";
+		});
+
 		chrome.tabs.query(
 			{
 				active: true,
@@ -77,7 +82,7 @@ setInterval(
 						if (data[currTab.id]) {
 							tabCO2Text.textContent = data[currTab.id].tabCO2Emission && data[currTab.id].tabCO2Emission >= 0 ?
 								`${data[currTab.id].tabCO2Emission.toFixed(2)} Grams` : "Loading...";
-							sessionCO2Text.textContent = data.sessionCO2Emission >=0 ? `${data.sessionCO2Emission.toFixed(2)} Grams` : "Loading...";
+							sessionCO2Text.textContent = data.sessionCO2Emission >=0 ? `${data.sessionCO2Emission.toFixed(2)} Grams` : "Recording...";
 						}
 					});
 				}
@@ -108,7 +113,7 @@ setInterval(
 			}
 		);
 	},
-	2000
+	500
 );
 
 // Navigate to options (or details) page

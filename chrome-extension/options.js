@@ -15,5 +15,7 @@ chrome.storage.local.get(null, function (data) {
 		0
 	);
 
+	document.getElementById("allTimeEmission").textContent = data.allTimeEmission;
+
 	allTimeCO2.textContent = allTimeCO2Amount || "No data found!";
 });

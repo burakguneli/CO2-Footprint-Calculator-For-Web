@@ -18,6 +18,42 @@ chrome.runtime.onInstalled.addListener(function () {
 	});
 });
 
+// Adds previous pages emission to all time emission count after navigating to another page
+chrome.webNavigation.onBeforeNavigate.addListener(
+	(navigationDetails) => {
+		chrome.storage.local.get(null, function (data) {
+			if (data.allTimeEmission) {
+				currentAllTimeEmission = data.allTimeEmission;
+
+				chrome.storage.local.set({
+					allTimeEmission: data.allTimeEmission + parseFloat(data[navigationDetails.tabId].tabCO2Emission)
+				});
+			} else {
+				chrome.storage.local.set({
+					allTimeEmission: parseFloat(data[navigationDetails.tabId].tabCO2Emission)
+				});
+			}
+		});
+	}
+);
+
+// Adds tab emission to all time emission count after closing the tab
+chrome.tabs.onRemoved.addListener(function(tabId) {
+	chrome.storage.local.get(null, function (data) {
+		if (data.allTimeEmission) {
+			currentAllTimeEmission = data.allTimeEmission;
+
+			chrome.storage.local.set({
+				allTimeEmission: data.allTimeEmission + parseFloat(data[tabId].tabCO2Emission)
+			});
+		} else {
+			chrome.storage.local.set({
+				allTimeEmission: parseFloat(data[tabId].tabCO2Emission)
+			});
+		}
+	});
+})
+
 function updateStorage(tabId, key, value) {
 	chrome.storage.local.set({
 		[tabId]: {
